@@ -12,7 +12,7 @@ const Navbar = () => {
                     </div>
                 </a>
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" className="text-gray-800 font-medium rounded-lg text-sm px-4 py-2 text-center">Login</button>
+                    <button type="button" className="text-gray-700 font-semibold rounded-lg text-lg px-4 py-2 text-center">Login</button>
                     <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-800 rounded-lg md:hidden " aria-controls="navbar-sticky" aria-expanded="false">
                         <span className="sr-only">Open main menu</span>
                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
