@@ -2,13 +2,36 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+//for category random colors
+const colorClasses = [
+    "bg-indigo-600",
+    "bg-purple-600",
+    "bg-pink-600",
+    "bg-rose-600",
+    "bg-red-600",
+    "bg-orange-600",
+    "bg-amber-600",
+    "bg-green-600",
+    "bg-emerald-600",
+    "bg-teal-600",
+    "bg-cyan-600",
+    "bg-blue-600",
+];
 
 export default function CourseCard({ course }) {
+    const [color, setColor] = useState("bg-indigo-600"); // fallback to prevent mismatch
+    // Pick random color once for each card render
+    useEffect(() => {
+        const randomColor = colorClasses[Math.floor(Math.random() * colorClasses.length)];
+        setColor(randomColor);
+    }, []);
     return (
         <motion.div
             whileHover={{ y: -5, scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200, damping: 12 }}
-            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:cursor-pointer"
         >
             {/* Image */}
             <div className="relative">
@@ -17,7 +40,7 @@ export default function CourseCard({ course }) {
                     alt={course.title}
                     className="w-full h-48 object-cover"
                 />
-                <span className="absolute top-3 left-3 bg-indigo-600 text-white text-xs font-semibold px-2 py-1 rounded-md">
+                <span className={`absolute top-3 left-3 ${color} text-white text-xs font-semibold px-2 py-1 rounded-md`}>
                     {course.category}
                 </span>
             </div>
@@ -27,7 +50,7 @@ export default function CourseCard({ course }) {
                 <motion.h3
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
+                    transition={{ delay: 0.4 }}
                     className="text-lg font-semibold text-gray-800 line-clamp-2"
                 >
                     {course.title}

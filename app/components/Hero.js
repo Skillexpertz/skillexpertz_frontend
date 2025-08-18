@@ -1,5 +1,7 @@
+"use client"
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 const Hero = () => {
     const brands = Array.from({ length: 5 }, (_, i) => `/brand_${i + 1}.png`);
     return (
@@ -44,7 +46,10 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-            <div className="relative w-[90%] max-w-4xl flex flex-row justify-between items-center mx-auto h-[80px] md:h-[100px] px-4 md:px-8 bg-white mt-[-70px] z-20 rounded-lg shadow-lg">
+            <motion.div className="relative w-[90%] max-w-4xl flex flex-row justify-between items-center mx-auto h-[80px] md:h-[100px] px-4 md:px-8 bg-white mt-[-70px] z-20 rounded-lg shadow-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+            >
                 {brands.map((src, idx) => (
                     <div key={src} className="flex-1 flex justify-center items-center min-w-0">
                         <Image
@@ -57,7 +62,7 @@ const Hero = () => {
                         />
                     </div>
                 ))}
-            </div>
+            </motion.div>
         </>
     );
 };
