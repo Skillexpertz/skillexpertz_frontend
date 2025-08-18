@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const Navbar = () => {
@@ -29,7 +30,7 @@ const Navbar = () => {
                             <a href="#" className="block py-2 px-3 text-gray-800 rounded-sm md:hover:bg-transparent md:p-0 ">About</a>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-gray-800 rounded-sm md:hover:bg-transparent md:p-0 ">Services</a>
+                            <Link href="/courses" className="block py-2 px-3 text-gray-800 rounded-sm md:hover:bg-transparent md:p-0 ">Courses</Link>
                         </li>
                         <li>
                             <a href="#" className="block py-2 px-3 text-gray-800 rounded-sm md:hover:bg-transparent md:p-0 ">Contact</a>
