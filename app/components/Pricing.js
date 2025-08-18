@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
-import PillLabels from "../shared/PillLabels";
+import PillLabels from "./shared/PillLabels";
 
 const Pricing = () => {
     const plans = [

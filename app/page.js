@@ -1,7 +1,8 @@
 import ContactHomepage from "./components/Contact/ContactHomepage";
 import Hero from "./components/Hero";
 import Homepage_Courses from "./components/Homepage_Courses";
-import Pricing from "./components/Pricing/pricing";
+import Pricing from "./components/Pricing";
+
 
 
 export default function Home() {
