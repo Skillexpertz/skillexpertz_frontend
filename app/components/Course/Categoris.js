@@ -1,21 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 
 const categories = ["All", "Artificial", "Featured", "Language", "Marketing"];
 
-export default function Categories() {
-    const [active, setActive] = useState("All");
-
+export default function Categories({ active, setActive }) {
     return (
         <div className="flex justify-center my-10">
             <div className="flex items-center bg-white rounded-xl shadow-sm px-6 py-3 w-[70%] justify-center space-x-4">
                 {categories.map((cat, idx) => (
-                    <div key={cat} className="flex items-center  text-center">
+                    <div key={cat} className="flex items-center text-center">
                         <button
                             onClick={() => setActive(cat)}
-                            className={`relative pb-2 text-sm md:text-base font-medium transition-colors ${active === cat ? "text-purple-600" : "text-gray-600 hover:text-gray-800"
+                            className={`relative pb-2 text-sm md:text-base font-medium transition-colors ${active === cat
+                                    ? "text-purple-600"
+                                    : "text-gray-600 hover:text-gray-800"
                                 }`}
                         >
                             {cat}
