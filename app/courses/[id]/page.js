@@ -7,7 +7,6 @@ export default function CourseDetailsPage({ params }) {
     const courseId = Number(params.id);
 
     const course = courses.find((c) => c.id === courseId);
-    console.log(course);
 
     if (!course) return <p>Course not found</p>;
 

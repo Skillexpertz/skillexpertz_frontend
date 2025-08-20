@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { getRandomColor } from "../utils/variables";
+import { allCategories, allTags, getRandomColor } from "../utils/variables";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import Blobs from "../shared/Blobs";
 
 const Courses = ({ coursesData }) => {
     const [search, setSearch] = useState("");
@@ -12,14 +13,21 @@ const Courses = ({ coursesData }) => {
     const [skillLevels, setSkillLevels] = useState([]);
     const [tags, setTags] = useState([]);
     const [page, setPage] = useState(1);
-    const perPage = 6;
+    const [sortOption, setSortOption] = useState("rel");
+    const [cardColors, setCardColors] = useState({});
+
+    const perPage = 9;
     const router = useRouter();
 
+    useEffect(() => {
+        const newColors = {};
+        coursesData.forEach(course => {
+            newColors[course.id] = getRandomColor();
+        });
+        setCardColors(newColors);
+    }, [coursesData]);
 
-
-    const allCategories = ["Mechanical", "Development", "Data & Tech", "UX Design"];
     const allSkillLevels = ["Beginner", "Intermediate", "Advanced"];
-    const allTags = ["Mechanic", "English", "Computer Science", "Data & Tech", "UX Design"];
 
 
 
@@ -40,10 +48,11 @@ const Courses = ({ coursesData }) => {
         setTags([]);
         setSearch("");
         setPage(1);
+        setSortOption("rel");
     };
 
     // Filter + Search
-    const filteredCourses = coursesData.filter((course) => {
+    let filteredCourses = coursesData.filter((course) => {
         const matchesSearch = course.title.toLowerCase().includes(search.toLowerCase());
 
         const matchesCategory =
@@ -58,12 +67,27 @@ const Courses = ({ coursesData }) => {
         return matchesSearch && matchesCategory && matchesSkill && matchesTag;
     });
 
+    // Apply sorting
+    let sortedCourses = [...filteredCourses];
+    if (sortOption === "price-asc") {
+        sortedCourses.sort((a, b) => a.price - b.price);
+    } else if (sortOption === "price-desc") {
+        sortedCourses.sort((a, b) => b.price - a.price);
+    } else if (sortOption === "duration-asc") {
+        sortedCourses.sort((a, b) => parseFloat(a.duration) - parseFloat(b.duration));
+    } else if (sortOption === "duration-desc") {
+        sortedCourses.sort((a, b) => parseFloat(b.duration) - parseFloat(a.duration));
+    } else if (sortOption === "new-desc") {
+        sortedCourses.sort((a, b) => b.id - a.id); // newest first
+    } else if (sortOption === "new-asc") {
+        sortedCourses.sort((a, b) => a.id - b.id); // oldest first
+    } else {
+        sortedCourses = [...filteredCourses];
+    }
+
     // Pagination
-    const totalPages = Math.ceil(filteredCourses.length / perPage);
-    const paginatedCourses = filteredCourses.slice(
-        (page - 1) * perPage,
-        page * perPage
-    );
+    const totalPages = Math.ceil(sortedCourses.length / perPage);
+    const paginatedCourses = sortedCourses.slice((page - 1) * perPage, page * perPage);
 
 
     const handleCardClick = (course) => {
@@ -87,9 +111,8 @@ const Courses = ({ coursesData }) => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 py-10 px-6 lg:px-60 relative">
-                {/* Gradient Blobs */}
-                <div className="absolute top-0 -left-20 w-72 h-72 bg-gradient-to-r from-[#F2277E] to-[#5F2DED] rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                <div className="absolute bottom-20 -right-20 w-80 h-80 bg-gradient-to-r from-[#5F2DED] to-[#F2277E] rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                {/* Gradient blobs */}
+                <Blobs />
 
                 {/* Sidebar Filters */}
                 <aside className="p-6">
@@ -105,7 +128,7 @@ const Courses = ({ coursesData }) => {
                     {/* Categories */}
                     <div className="rounded-2xl shadow-md bg-white p-4 my-5">
                         <h3 className="font-semibold mb-2">Categories</h3>
-                        <ul className="space-y-2 mb-6">
+                        <ul className="space-y-2 mb-6 overflow-scroll max-h-[300px] overflow-x-hidden">
                             {allCategories.map((cat) => (
                                 <li key={cat}>
                                     <label className="flex items-center gap-2 cursor-pointer">
@@ -146,7 +169,7 @@ const Courses = ({ coursesData }) => {
                     {/* Tags */}
                     <div className="rounded-2xl shadow-md bg-white p-4 my-5">
                         <h3 className="font-semibold mb-2">Tags</h3>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 overflow-scroll max-h-[300px] overflow-x-hidden">
                             {allTags.map((tag) => (
                                 <li key={tag}>
                                     <label className="flex items-center gap-2 cursor-pointer">
@@ -166,15 +189,22 @@ const Courses = ({ coursesData }) => {
                 {/* Courses Grid */}
                 <main className="lg:col-span-3">
                     {/* Sorting + Reset */}
-                    <div className="flex justify-between items-center mb-6">
-                        <p className="text-gray-600">
+                    <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+                        <p className="text-gray-600 mb-5 md:mb-0">
                             Showing {paginatedCourses.length} of {filteredCourses.length} Results
                         </p>
-                        <div className="flex items-center gap-4">
-                            <select className="border border-gray-200 rounded-lg px-4 py-2">
-                                <option>Sort by New</option>
-                                <option>Sort by Price</option>
-                                <option>Sort by Duration</option>
+                        <div className="flex justify-start md:justify-normal md:items-center gap-4">
+                            <select className="border border-gray-200 rounded-lg px-4 py-2"
+                                value={sortOption}
+                                onChange={(e) => setSortOption(e.target.value)}
+                            >
+                                <option value="rel">Relevance</option>
+                                <option value="new-desc">Newest First</option>
+                                <option value="new-asc">Oldest First</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="duration-asc">Duration: Short to Long</option>
+                                <option value="duration-desc">Duration: Long to Short</option>
                             </select>
                             <button
                                 onClick={resetFilters}
@@ -200,12 +230,13 @@ const Courses = ({ coursesData }) => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.3 }}
-                                    className="bg-white p-4 rounded-2xl shadow hover:shadow-lg transition hover:scale-105 hover:cursor-pointer relative h-[370px] flex flex-col"
+                                    className="bg-white p-4 rounded-2xl shadow hover:shadow-lg transition hover:scale-105 hover:cursor-pointer relative h-[370px] flex flex-col mx-6 md:mx-0"
                                     onClick={() => handleCardClick(course)}
                                 >
                                     {/* Category Tag */}
                                     <span
-                                        className={`absolute top-3 left-3 ${getRandomColor()} text-white text-xs font-semibold px-2 py-1 rounded-md`}
+                                        className={`absolute top-3 left-3 ${cardColors[course.id] || "bg-indigo-600"
+                                            } text-white text-xs font-semibold px-2 py-1 rounded-md`}
                                     >
                                         {course.category}
                                     </span>
