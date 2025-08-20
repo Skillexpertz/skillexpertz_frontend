@@ -39,7 +39,7 @@ const Hero = () => {
                         </button>
                     </div>
                     {/* Stats below */}
-                    <div className="flex gap-6 mt-6 text-gray-300 text-sm md:text-base">
+                    <div className="flex gap-6 mt-6 mx-5 md:mx-0 text-gray-300 text-sm md:text-base">
                         <span>✔ More than 2k Courses</span>
                         <span>✔ 1.1k Free Courses</span>
                         <span>✔ 150+ Instructors</span>
@@ -51,7 +51,7 @@ const Hero = () => {
                 whileInView={{ opacity: 1, y: 0 }}
             >
                 {brands.map((src, idx) => (
-                    <div key={src} className="flex-1 flex justify-center items-center min-w-0">
+                    <div key={src} className="flex-1 flex flex-wrap justify-center items-center min-w-0">
                         <Image
                             src={src}
                             alt={`Brand ${idx + 1}`}

@@ -16,13 +16,13 @@ export default function Footer() {
                             Don’t wait make a smart & logical quote here. Its pretty easy.
                         </p>
                     </div>
-                    <div className="flex">
+                    <div className="flex w-full md:w-auto">
                         <input
                             type="email"
                             placeholder="Enter your email here"
-                            className="px-4 py-3 w-72 bg-[#1e1d35] text-gray-300 outline-none rounded-l-md"
+                            className="px-4 py-2 w-72 bg-[#1e1d35] text-gray-300 outline-none rounded-l-md"
                         />
-                        <button className="bg-purple-500 px-6 py-3 rounded-r-md hover:bg-purple-600 transition">
+                        <button className="bg-purple-500 px-4 md:px-6 py-2 rounded-r-md hover:bg-purple-600 transition">
                             Subscribe Now
                         </button>
                     </div>
