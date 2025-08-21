@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import PillLabels from "./shared/PillLabels";
 
 export default function Testimonial() {
     const testimonials = [
@@ -36,14 +37,12 @@ export default function Testimonial() {
             <div className="max-w-6xl mx-auto px-6 lg:px-12 grid md:grid-cols-2 gap-12 items-center">
                 {/* Left Text Section */}
                 <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: -50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                 >
-                    <span className="px-3 py-1 bg-purple-200 text-purple-700 text-sm rounded-full font-medium">
-                        Course List
-                    </span>
+                    <PillLabels title="Testimonials" />
                     <h2 className="text-3xl font-bold mt-4 mb-6">
                         What They Say <br /> About us
                     </h2>
