@@ -134,3 +134,46 @@ export const allTags = [
     "Advanced",
     "English"
 ];
+
+
+export const pricingPlans = [
+    {
+        name: "FREE",
+        price: "$0",
+        period: "/month",
+        users: "2 user",
+        features: [
+            { text: "Learning Scope", available: true },
+            { text: "Team collaboration", available: false },
+            { text: "Export HTML code", available: false },
+            { text: "Upload Your Logo", available: true },
+        ],
+        buttonColor: "bg-purple-600",
+    },
+    {
+        name: "BASIC",
+        price: "$29",
+        period: "/month",
+        users: "5 user",
+        features: [
+            { text: "Learning Scope", available: true },
+            { text: "Team collaboration", available: true },
+            { text: "Export HTML code", available: false },
+            { text: "Upload Your Logo", available: true },
+        ],
+        buttonColor: "bg-pink-500",
+    },
+    {
+        name: "PRO",
+        price: "$59",
+        period: "/month",
+        users: "2 user",
+        features: [
+            { text: "Learning Scope", available: true },
+            { text: "Team collaboration", available: true },
+            { text: "Export HTML code", available: true },
+            { text: "Upload Your Logo", available: true },
+        ],
+        buttonColor: "bg-purple-600",
+    },
+];

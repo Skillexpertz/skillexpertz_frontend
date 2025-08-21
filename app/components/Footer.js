@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaVimeoV, FaSkype, FaClock, FaArrowUp } from "react-icons/fa";
 
 
@@ -52,11 +53,11 @@ export default function Footer() {
                     <div>
                         <h3 className="font-bold mb-4">Usefull Links</h3>
                         <ul className="space-y-2 text-gray-400">
-                            <li>About Us</li>
-                            <li>Teachers</li>
-                            <li>Partner</li>
-                            <li>Room-Details</li>
-                            <li>Gallery</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">About Us</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">Teachers</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">Partner</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer"><Link href="/courses">Courses</Link></li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">Gallery</li>
                         </ul>
                     </div>
 
@@ -64,11 +65,11 @@ export default function Footer() {
                     <div>
                         <h3 className="font-bold mb-4">Course</h3>
                         <ul className="space-y-2 text-gray-400">
-                            <li>UI UX Design</li>
-                            <li>Web Development</li>
-                            <li>Business Strategy</li>
-                            <li>Software Development</li>
-                            <li>Business English</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">UI UX Design</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">Web Development</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">Business Strategy</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">Software Development</li>
+                            <li className="hover:text-purple-600 hover:cursor-pointer">Business English</li>
                         </ul>
                     </div>
 

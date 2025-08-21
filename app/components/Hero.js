@@ -46,7 +46,7 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-            <motion.div className="relative w-[90%] max-w-4xl flex flex-row justify-between items-center mx-auto h-[80px] md:h-[100px] px-4 md:px-8 bg-white mt-[-70px] z-20 rounded-lg shadow-lg"
+            <motion.div className="hidden relative w-[90%] max-w-4xl lg:flex flex-row justify-between items-center mx-auto h-[80px] md:h-[100px] px-4 md:px-8 bg-white mt-[-70px] z-20 rounded-lg shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
             >
@@ -57,12 +57,34 @@ const Hero = () => {
                             alt={`Brand ${idx + 1}`}
                             width={120}
                             height={60}
-                            className="max-h-8 md:max-h-10 w-auto object-contain max-w-full"
+                            className="max-h-12 md:max-h-10 w-[120px] object-contain max-w-full"
                             priority={idx < 2}
                         />
                     </div>
                 ))}
             </motion.div>
+            {/* mobile and tablet */}
+            <div className="lg:hidden  overflow-hidden bg-white rounded-lg shadow-lg px-4 mx-0 md:mx-10 py-3 mt-[-40px] h-[100px]">
+                <motion.div
+                    className="flex items-center gap-8 h-full"
+                    animate={{ x: ["0%", "-100%"] }}
+                    transition={{ ease: "linear", duration: 12, repeat: Infinity }}
+                >
+                    {[...brands, ...brands].map((src, idx) => (
+                        <div key={idx} className="flex-shrink-0 flex items-center h-full">
+                            <Image
+                                src={src}
+                                alt={`Brand ${idx + 1}`}
+                                width={170}
+                                height={80}
+                                className="object-contain max-h-20 w-auto"
+                                priority={idx < 2}
+                            />
+                        </div>
+                    ))}
+                </motion.div>
+            </div>
+
         </>
     );
 };

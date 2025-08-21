@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { allCategories, allTags, getRandomColor } from "../utils/variables";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaRegStar, FaFilter } from "react-icons/fa";
 import Blobs from "../shared/Blobs";
+import FiltersPanel from "./FiltersPanel";
 
 const Courses = ({ coursesData }) => {
     const [search, setSearch] = useState("");
@@ -15,6 +16,7 @@ const Courses = ({ coursesData }) => {
     const [page, setPage] = useState(1);
     const [sortOption, setSortOption] = useState("rel");
     const [cardColors, setCardColors] = useState({});
+    const [showFilters, setShowFilters] = useState(false)
 
     const perPage = 9;
     const router = useRouter();
@@ -115,76 +117,21 @@ const Courses = ({ coursesData }) => {
                 <Blobs />
 
                 {/* Sidebar Filters */}
-                <aside className="p-6">
-                    {/* Search */}
-                    <input
-                        type="text"
-                        placeholder="Search product"
-                        className="w-full border border-gray-200 rounded-lg px-4 py-2 mb-6"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
+                <FiltersPanel
+                    search={search}
+                    setSearch={setSearch}
+                    categories={categories}
+                    setCategories={setCategories}
+                    skillLevels={skillLevels}
+                    setSkillLevels={setSkillLevels}
+                    tags={tags}
+                    setTags={setTags}
+                    allCategories={allCategories}
+                    allSkillLevels={allSkillLevels}
+                    allTags={allTags}
+                    toggleFilter={toggleFilter}
+                />
 
-                    {/* Categories */}
-                    <div className="rounded-2xl shadow-md bg-white p-4 my-5">
-                        <h3 className="font-semibold mb-2">Categories</h3>
-                        <ul className="space-y-2 mb-6 overflow-scroll max-h-[300px] overflow-x-hidden">
-                            {allCategories.map((cat) => (
-                                <li key={cat}>
-                                    <label className="flex items-center gap-2 cursor-pointer">
-                                        <input
-                                            type="checkbox"
-                                            checked={categories.includes(cat)}
-                                            onChange={() => toggleFilter(cat, setCategories, categories)}
-                                        />
-                                        {cat}
-                                    </label>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-
-                    {/* Skill Level */}
-                    <div className="rounded-2xl shadow-md bg-white p-4 my-5">
-                        <h3 className="font-semibold mb-2">Skill Level</h3>
-                        <ul className="space-y-2 mb-6">
-                            {allSkillLevels.map((level) => (
-                                <li key={level}>
-                                    <label className="flex items-center gap-2 cursor-pointer">
-                                        <input
-                                            type="checkbox"
-                                            checked={skillLevels.includes(level)}
-                                            onChange={() =>
-                                                toggleFilter(level, setSkillLevels, skillLevels)
-                                            }
-                                        />
-                                        {level}
-                                    </label>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Tags */}
-                    <div className="rounded-2xl shadow-md bg-white p-4 my-5">
-                        <h3 className="font-semibold mb-2">Tags</h3>
-                        <ul className="space-y-2 overflow-scroll max-h-[300px] overflow-x-hidden">
-                            {allTags.map((tag) => (
-                                <li key={tag}>
-                                    <label className="flex items-center gap-2 cursor-pointer">
-                                        <input
-                                            type="checkbox"
-                                            checked={tags.includes(tag)}
-                                            onChange={() => toggleFilter(tag, setTags, tags)}
-                                        />
-                                        {tag}
-                                    </label>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </aside>
 
                 {/* Courses Grid */}
                 <main className="lg:col-span-3">

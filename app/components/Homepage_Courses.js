@@ -23,7 +23,7 @@ const Homepage_Courses = () => {
 
     return (
         <div className='bg-[#F3F4FD] w-full'>
-            <div className='mt-20 pt-10'>
+            <div className='mt-10 md:mt-20 pt-10'>
                 <PillLabels title="Course List" className="mx-auto" />
                 <h1 className="text-3xl font-bold text-center  text-gray-600">
                     Perfect Online{" "}
@@ -35,10 +35,10 @@ const Homepage_Courses = () => {
             </div>
 
             {/* Categories with state */}
-            <Categories active={activeCategory} setActive={setActiveCategory} />
+            {/* <Categories active={activeCategory} setActive={setActiveCategory} /> */}
 
             {/* Courses grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto py-10 transition-transform duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-5 md:px-10 lg:px-0 py-10 transition-transform duration-300">
                 {displayedCourses.map((course, index) => (
                     <motion.div
                         key={course.id}

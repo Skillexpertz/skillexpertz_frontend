@@ -1,50 +1,9 @@
 "use client"
 import { motion } from "framer-motion";
 import PillLabels from "./shared/PillLabels";
+import { pricingPlans } from "./utils/variables";
 
 const Pricing = () => {
-    const plans = [
-        {
-            name: "FREE",
-            price: "$0",
-            period: "/month",
-            users: "2 user",
-            features: [
-                { text: "Learning Scope", available: true },
-                { text: "Team collaboration", available: false },
-                { text: "Export HTML code", available: false },
-                { text: "Upload Your Logo", available: true },
-            ],
-            buttonColor: "bg-purple-600",
-        },
-        {
-            name: "BASIC",
-            price: "$29",
-            period: "/month",
-            users: "5 user",
-            features: [
-                { text: "Learning Scope", available: true },
-                { text: "Team collaboration", available: true },
-                { text: "Export HTML code", available: false },
-                { text: "Upload Your Logo", available: true },
-            ],
-            buttonColor: "bg-pink-500",
-        },
-        {
-            name: "PRO",
-            price: "$59",
-            period: "/month",
-            users: "2 user",
-            features: [
-                { text: "Learning Scope", available: true },
-                { text: "Team collaboration", available: true },
-                { text: "Export HTML code", available: true },
-                { text: "Upload Your Logo", available: true },
-            ],
-            buttonColor: "bg-purple-600",
-        },
-    ];
-
     return (
         <section className="py-16 bg-white">
             <div className="text-center mb-12">
@@ -54,8 +13,8 @@ const Pricing = () => {
                 </h2>
             </div>
 
-            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                {plans.map((plan, idx) => (
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-10 lg:px-0">
+                {pricingPlans.map((plan, idx) => (
                     <motion.div
                         key={idx}
                         whileHover={{ scale: 1.05 }}

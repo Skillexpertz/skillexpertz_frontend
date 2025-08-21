@@ -56,7 +56,7 @@ export default function StatsSection() {
     ];
 
     return (
-        <div className="flex justify-around py-10 flex-wrap w-[70%] mx-auto">
+        <div className="flex flex-col space-y-5 md:space-y-0 md:flex-row md:justify-around py-10 flex-wrap w-[70%] mx-auto">
             {stats.map((stat, i) => (
                 <StatCard key={i} {...stat} />
             ))}
