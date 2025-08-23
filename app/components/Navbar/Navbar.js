@@ -25,12 +25,15 @@ const Navbar = () => {
     return (
         <nav className="bg-white w-full">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <Link href="/" className="flex items-center rtl:space-x-reverse">
-                    <Image src="/logo.png" className="h-8" alt="SkillExpertz Logo" width={50} height={50} />
-                    <div className='mx-2'>
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#F1287E]">Skill</span>
-                        <span className="text-2xl font-semibold whitespace-nowrap text-[#5F2DED]">Expertz</span>
-                    </div>
+                <Link href="/">
+                    <Image
+                        src="/SkillexpertZ001.png"
+                        alt="SkillExpertz Logo"
+                        width={500} // Larger resolution
+                        height={500}
+                        className="h-auto w-[100px]" // Adjusts height but keeps aspect ratio
+                        priority // Loads the logo ASAP for better quality
+                    />
                 </Link>
 
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -58,8 +61,8 @@ const Navbar = () => {
                                 <Link
                                     href={item.href}
                                     className={`block py-2 px-3 rounded-sm md:p-0 transition-colors ${isActive(item.href)
-                                            ? 'text-[#5F2DED] font-semibold bg-gray-100 md:bg-transparent'
-                                            : 'text-gray-800 hover:text-[#5F2DED] hover:bg-gray-100 md:hover:bg-transparent'
+                                        ? 'text-[#5F2DED] font-semibold bg-gray-100 md:bg-transparent'
+                                        : 'text-gray-800 hover:text-[#5F2DED] hover:bg-gray-100 md:hover:bg-transparent'
                                         }`}
                                     aria-current={isActive(item.href) ? 'page' : undefined}
                                 >
@@ -70,7 +73,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav >
     )
 }
 
