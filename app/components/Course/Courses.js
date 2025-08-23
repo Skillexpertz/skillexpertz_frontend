@@ -7,6 +7,7 @@ import { allCategories, allTags, getRandomColor } from "../utils/variables";
 import { FaStar, FaStarHalfAlt, FaRegStar, FaFilter } from "react-icons/fa";
 import Blobs from "../shared/Blobs";
 import FiltersPanel from "./FiltersPanel";
+import CourseCard from "./CourseCard";
 
 const Courses = ({ coursesData }) => {
     const [search, setSearch] = useState("");
@@ -166,74 +167,17 @@ const Courses = ({ coursesData }) => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {paginatedCourses.map((course) => {
-                            const fullStars = Math.floor(course.rating);
-                            const halfStar = course.rating % 1 >= 0.5;
-                            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-
                             return (
                                 <motion.div
                                     key={course.id}
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.3 }}
-                                    className="bg-white p-4 rounded-2xl shadow hover:shadow-lg transition hover:scale-105 hover:cursor-pointer relative h-[370px] flex flex-col mx-6 md:mx-0"
+                                    transition={{ duration: 0.3, delay: course.id * 0.1 }}
+
                                     onClick={() => handleCardClick(course)}
                                 >
-                                    {/* Category Tag */}
-                                    <span
-                                        className={`absolute top-3 left-3 ${cardColors[course.id] || "bg-indigo-600"
-                                            } text-white text-xs font-semibold px-2 py-1 rounded-md`}
-                                    >
-                                        {course.category}
-                                    </span>
-
-                                    {/* Image */}
-                                    <div className="h-36 rounded-lg mb-4">
-                                        <Image
-                                            src={course.image}
-                                            alt={course.title}
-                                            width={500}
-                                            height={500}
-                                            className="w-full h-full object-cover rounded-lg"
-                                        />
-                                    </div>
-
-                                    {/* Title & Info */}
-                                    <h3 className="text-lg font-semibold mb-2">{course.title}</h3>
-                                    <p className="text-sm text-gray-500 mb-2">
-                                        {course.courseContent.length} Lessons • {course.duration}
-                                    </p>
-
-                                    {/* Price */}
-                                    <p className="text-gray-800 font-semibold">
-                                        ${course.price}{" "}
-                                        <span className="text-gray-400 line-through ml-2">
-                                            ${course.oldPrice}
-                                        </span>
-                                        {course.isFree && (
-                                            <span className="ml-2 text-green-500 font-semibold">Free</span>
-                                        )}
-                                    </p>
-
-                                    <hr className="text-gray-300 mt-auto" />
-
-                                    {/* Instructor + Rating */}
-                                    <div className="flex items-center justify-between mt-2">
-                                        <p className="text-sm text-gray-500">By {course.instructor}</p>
-                                        <div className="flex items-center text-yellow-400 text-sm">
-                                            {Array.from({ length: fullStars }, (_, i) => (
-                                                <FaStar key={`full-${i}`} />
-                                            ))}
-                                            {halfStar && <FaStarHalfAlt />}
-                                            {Array.from({ length: emptyStars }, (_, i) => (
-                                                <FaRegStar key={`empty-${i}`} />
-                                            ))}
-                                            <span className="ml-1 text-gray-600 text-xs">
-                                                {course.rating.toFixed(1)}
-                                            </span>
-                                        </div>
-                                    </div>
+                                    <CourseCard course={course} />
                                 </motion.div>
                             );
                         })}
