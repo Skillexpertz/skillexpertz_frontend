@@ -1,7 +1,8 @@
+import SeminarButton from "./components/Buttons/SeminarButton";
 import ContactHomepage from "./components/Contact/ContactHomepage";
 import Hero from "./components/Hero";
 import Homepage_Courses from "./components/Homepage_Courses";
-import Pricing from "./components/Pricing";
+import ImageSliderHome from "./components/shared/ImageSliderHome";
 import Testimonial from "./components/Testimonials";
 
 
@@ -12,7 +13,8 @@ export default function Home() {
       <Hero />
       <Homepage_Courses />
       <ContactHomepage />
-      <Pricing />
+      <ImageSliderHome />
+      <SeminarButton seminarUrl="https://example.com/seminar" />
       <Testimonial />
     </div>
   );

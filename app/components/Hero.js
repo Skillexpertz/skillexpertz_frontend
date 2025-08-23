@@ -46,23 +46,36 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-            <motion.div className="hidden relative w-[90%] max-w-4xl lg:flex flex-row justify-between items-center mx-auto h-[80px] md:h-[100px] px-4 md:px-8 bg-white mt-[-70px] z-20 rounded-lg shadow-lg"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-            >
-                {brands.map((src, idx) => (
-                    <div key={src} className="flex-1 flex flex-wrap justify-center items-center min-w-0">
-                        <Image
-                            src={src}
-                            alt={`Brand ${idx + 1}`}
-                            width={120}
-                            height={60}
-                            className="max-h-12 md:max-h-10 w-[120px] object-contain max-w-full"
-                            priority={idx < 2}
-                        />
-                    </div>
-                ))}
-            </motion.div>
+            <div className="w-full flex flex-col items-center mt-10">
+                {/* Heading */}
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4">
+                    We are <span className="text-purple-600">working</span> with
+                </h2>
+
+                {/* Brand container */}
+                <motion.div
+                    className="hidden relative w-[90%] max-w-4xl lg:flex flex-row justify-between items-center mx-auto h-[80px] md:h-[100px] px-4 md:px-8 bg-white mt-[-20px] z-20 rounded-lg shadow-lg"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                >
+                    {brands.map((src, idx) => (
+                        <div
+                            key={src}
+                            className="flex-1 flex flex-wrap justify-center items-center min-w-0"
+                        >
+                            <Image
+                                src={src}
+                                alt={`Brand ${idx + 1}`}
+                                width={120}
+                                height={60}
+                                className="max-h-12 md:max-h-10 w-[120px] object-contain max-w-full"
+                                priority={idx < 2}
+                            />
+                        </div>
+                    ))}
+                </motion.div>
+            </div>
+
             {/* mobile and tablet */}
             <div className="lg:hidden  overflow-hidden bg-white rounded-lg shadow-lg px-4 mx-0 md:mx-10 py-3 mt-[-40px] h-[100px]">
                 <motion.div
