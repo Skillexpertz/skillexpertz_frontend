@@ -3,10 +3,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
+import MobileDropdown from '../Dropdowns/MobileDropdown'
 
 const Navbar = () => {
     const pathname = usePathname()
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const isActive = (path) => {
         if (path === '/') {
@@ -23,21 +25,22 @@ const Navbar = () => {
     ]
 
     return (
-        <nav className="bg-white w-full">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <Link href="/">
+        <nav className="bg-white w-full h-[80px] md:h-[100px] flex items-center">
+            <div className="max-w-screen-xl flex items-center justify-between mx-auto w-full px-4">
+                <Link href="/" className="flex items-center">
                     <Image
                         src="/SkillexpertZ001.png"
                         alt="SkillExpertz Logo"
-                        width={500} // Larger resolution
-                        height={500}
-                        className="h-auto w-[100px]" // Adjusts height but keeps aspect ratio
-                        priority // Loads the logo ASAP for better quality
+                        width={500}      // original PNG dimensions
+                        height={160}     // original PNG height
+                        className="h-auto w-[150px] md:w-[170px]"
+                        priority
+                        unoptimized
                     />
                 </Link>
 
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button type="button" className="text-gray-700 font-semibold rounded-lg text-lg px-4 py-2 text-center hover:text-[#5F2DED] transition-colors">
+                    <button type="button" className="text-gray-700 font-semibold rounded-lg text-lg px-4 py-2 text-center hover:text-[#5F2DED] transition-colors hidden md:block">
                         Login
                     </button>
                     <button
@@ -46,6 +49,7 @@ const Navbar = () => {
                         className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-800 rounded-lg md:hidden hover:bg-gray-100"
                         aria-controls="navbar-sticky"
                         aria-expanded="false"
+                        onClick={() => setMobileOpen((prev) => !prev)}
                     >
                         <span className="sr-only">Open main menu</span>
                         <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -73,6 +77,11 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
+            <MobileDropdown
+                isOpen={mobileOpen}
+                onClose={() => setMobileOpen(false)}
+                navItems={navItems}
+            />
         </nav >
     )
 }
