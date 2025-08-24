@@ -1,12 +1,27 @@
 "use client"
 import Image from "next/image";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import SeminarModal from "./Modals/SeminarModal";
 
 const Hero = () => {
     const brands = Array.from({ length: 5 }, (_, i) => `/brand_${i + 1}.png`);
+    const [showModal, setShowModal] = useState(false);
+
+
+    useEffect(() => {
+        // Show modal after page load
+        const timer = setTimeout(() => setShowModal(true), 200); // small delay for effect
+        return () => clearTimeout(timer);
+    }, []);
     return (
         <>
+            <AnimatePresence>
+                {showModal && (
+                    <SeminarModal onClose={() => setShowModal(false)} />
+                )}
+            </AnimatePresence>
+
             <div className="relative h-[850px] md:h-[736px] md:mx-10 lg:mx-20 rounded-2xl">
                 {/* Background layer */}
                 <div

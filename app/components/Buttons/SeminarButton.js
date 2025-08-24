@@ -5,7 +5,7 @@ export default function SeminarButton({ seminarUrl }) {
     return (
         <div className="w-full flex items-center justify-center py-12">
             <Link
-                href={seminarUrl}
+                href={seminarUrl || "https://example.com/seminar"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative group inline-block"
