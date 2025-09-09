@@ -10,10 +10,20 @@ const Hero = () => {
 
 
     useEffect(() => {
-        // Show modal after page load
-        const timer = setTimeout(() => setShowModal(true), 200); // small delay for effect
-        return () => clearTimeout(timer);
+        // Check if modal was already shown in this session
+        const modalShown = sessionStorage.getItem("seminarModalShown");
+
+        if (!modalShown) {
+            const timer = setTimeout(() => {
+                setShowModal(true);
+                sessionStorage.setItem("seminarModalShown", "true"); // Mark as shown
+            }, 200);
+
+            return () => clearTimeout(timer);
+        }
     }, []);
+
+
     return (
         <>
             <AnimatePresence>
