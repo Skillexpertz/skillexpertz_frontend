@@ -22,7 +22,8 @@ export default function CourseCard({ course }) {
         <motion.div
             whileHover={{ y: -5, scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200, damping: 12 }}
-            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:cursor-pointer h-[420px] flex flex-col"
+            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 hover:cursor-pointer h-[400px] flex flex-col"
+
             onClick={() => handleCardClick(course)}
         >
             {/* Image */}

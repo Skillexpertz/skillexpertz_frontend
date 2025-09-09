@@ -19,7 +19,7 @@ const Courses = ({ coursesData }) => {
     const [cardColors, setCardColors] = useState({});
     const [showFilters, setShowFilters] = useState(false)
 
-    const perPage = 9;
+    const perPage = 8;
     const router = useRouter();
 
     useEffect(() => {
@@ -113,7 +113,7 @@ const Courses = ({ coursesData }) => {
                 <p className="text-gray-500">Home &gt; Courses</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 py-10 px-6 lg:px-60 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 py-10 px-6 lg:px-40 relative">
                 {/* Gradient blobs */}
                 <Blobs />
 
@@ -165,7 +165,7 @@ const Courses = ({ coursesData }) => {
 
                     {/* Course Cards */}
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {paginatedCourses.map((course) => {
                             return (
                                 <motion.div
